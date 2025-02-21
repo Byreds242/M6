@@ -1,0 +1,431 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+
+:root {
+	--gradient: linear-gradient(135deg, #72EDF2 10%, #5151E5 100%); /* filtro azul para imagen de tiempo*/
+	--bg-color: rgb(255, 255, 255);
+	
+  	--text-color: black;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	line-height: 1.25em;
+}
+
+.clear {
+	clear: both;
+}
+
+body {
+	/*background: linear-gradient(135deg, #1e3c72, #2a5298);
+	color: #fff;*/
+	background-color: var(--bg-color);
+  	color: var(--text-color);
+	
+	margin: 0;
+	width: 100%;
+	height: 100vh;
+	font-family: 'Montserrat', sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: auto;
+	transition: all 0.3s ease;
+}
+
+.containertitulo {
+	text-align: center;
+	padding: 20px;
+}
+
+button {
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border: none;
+	background-color: var(--text-color);
+	color: var(--bg-color);
+	transition: all 0.3s ease;
+}
+
+
+/* contenedor del tiempo*/
+.container {
+	border-radius: 25px;
+	-webkit-box-shadow: 0 0 70px -10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 70px -10px rgba(0, 0, 0, 0.2);
+	background-color: #222831;
+	color: #ffffff;
+	height: 400px;
+}
+
+/* conetnedor grande */
+.contenedor {
+	margin: 20px 0;
+	display: flex;
+	gap: 100px;
+}
+
+/* divs pequeños */
+.div {
+	height: auto;
+	border-radius: 8px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* estilo imagen añadida*/
+#imageContainer {
+	margin-top: 20px;
+	padding: 10px;
+	min-height: 200px;
+	max-width: 600px;
+	margin: 20px auto;
+  }
+  
+  #imagePreview {
+	max-width: 100%;
+	max-height: 400px;
+  }
+
+/* modal */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto; /* Reducimos el margen superior para dar más espacio */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+    max-height: 80vh; /* Limita la altura del modal al 80% del viewport */
+    overflow-y: auto; /* Hace que el contenido sea desplazable verticalmente */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+
+/* estilos de el tiempo (codepen) */
+.weather-side {
+	position: relative;
+	height: 100%;
+	border-radius: 25px;
+	background-image: url("https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
+	width: 300px;
+	-webkit-box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
+	-webkit-transition: -webkit-transform 300ms ease;
+	transition: -webkit-transform 300ms ease;
+	-o-transition: transform 300ms ease;
+	transition: transform 300ms ease;
+	transition: transform 300ms ease, -webkit-transform 300ms ease;
+	-webkit-transform: translateZ(0) scale(1.02) perspective(1000px);
+	transform: translateZ(0) scale(1.02) perspective(1000px);
+	float: left;
+}
+
+.weather-side:hover {
+	-webkit-transform: scale(1.1) perspective(1500px) rotateY(10deg);
+	transform: scale(1.1) perspective(1500px) rotateY(10deg);
+}
+
+.weather-gradient {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-image: var(--gradient);
+	border-radius: 25px;
+	opacity: 0.8;
+}
+
+.date-container {
+	position: absolute;
+	top: 25px;
+	left: 25px;
+}
+
+.date-dayname {
+	margin: 0;
+}
+
+.date-day {
+	display: block;
+}
+
+.location {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.location-icon {
+	display: inline-block;
+	height: 0.8em;
+	width: auto;
+	margin-right: 5px;
+}
+
+.weather-container {
+	position: absolute;
+	bottom: 25px;
+	left: 25px;
+}
+
+.weather-icon.feather {
+	height: 60px;
+	width: auto;
+}
+
+.weather-temp {
+	margin: 0;
+	font-weight: 700;
+	font-size: 4em;
+}
+
+.weather-desc {
+	margin: 0;
+}
+
+.info-side {
+	position: relative;
+	float: left;
+	height: 100%;
+	padding-top: 25px;
+}
+
+.today-info {
+	padding: 15px;
+	margin: 0 25px 25px 25px;
+	border-radius: 10px;
+}
+
+.today-info>div:not(:last-child) {
+	margin: 0 0 10px 0;
+}
+
+.today-info>div .title {
+	float: left;
+	font-weight: 700;
+}
+
+.today-info>div .value {
+	float: right;
+}
+
+.week-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 10px 35px;
+	-webkit-box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+}
+
+.week-list>li {
+	float: left;
+	padding: 15px;
+	cursor: pointer;
+	-webkit-transition: 200ms ease;
+	-o-transition: 200ms ease;
+	transition: 200ms ease;
+	border-radius: 10px;
+}
+
+.week-list>li:hover {
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	transform: scale(1.1);
+	background: #fff;
+	color: #222831;
+	-webkit-box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2);
+}
+
+.week-list>li.active {
+	background: #fff;
+	color: #222831;
+	border-radius: 10px;
+}
+
+.week-list>li .day-name {
+	display: block;
+	margin: 10px 0 0 0;
+	text-align: center;
+}
+
+.week-list>li .day-icon {
+	display: block;
+	height: 30px;
+	width: auto;
+	margin: 0 auto;
+}
+
+.week-list>li .day-temp {
+	display: block;
+	text-align: center;
+	margin: 10px 0 0 0;
+	font-weight: 700;
+}
+
+.location-container {
+	padding: 25px 35px;
+}
+
+.location-button {
+	outline: none;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border: none;
+	border-radius: 25px;
+	padding: 10px;
+	font-family: 'Montserrat', sans-serif;
+	background-image: var(--gradient);
+	color: #ffffff;
+	font-weight: 700;
+	-webkit-box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
+	-webkit-transition: -webkit-transform 200ms ease;
+	transition: -webkit-transform 200ms ease;
+	-o-transition: transform 200ms ease;
+	transition: transform 200ms ease;
+	transition: transform 200ms ease, -webkit-transform 200ms ease;
+}
+
+.location-button:hover {
+	-webkit-transform: scale(0.95);
+	-ms-transform: scale(0.95);
+	transform: scale(0.95);
+}
+
+.location-button .feather {
+	height: 1em;
+	width: auto;
+	margin-right: 5px;
+}
+
+form {
+	background: rgba(255, 255, 255, 0.1);
+	padding: 20px;
+	border-radius: 10px;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	text-align: center;
+}
+
+select,
+input[type="submit"] {
+	width: 100%;
+	padding: 10px;
+	margin: 10px 0;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+select {
+	/*background: rgba(255, 255, 255, 0.2);
+	color: #fff;*/
+	
+    color: var(--dropdown-text, #000); /* Texto oscuro por defecto */
+    border: 1px solid var(--dropdown-border, #ccc);
+    padding: 5px;
+    appearance: none; /* Opcional: remueve el estilo nativo */
+	outline: none;
+	cursor: pointer;
+}
+
+select option {
+	color: black;
+}
+
+select:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+input[type="submit"] {
+	background: #ff6f61;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+input[type="submit"]:hover {
+	background: #e65c50;
+}
+
+#image-container {
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	justify-content: center;
+}
+
+.image-box {
+	width: 400px;
+	height: 300px;
+	background: #ffffff;
+	border-radius: 12px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-box:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.image-box img {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+	transition: transform 0.3s ease;
+}
+
+.image-box:hover img {
+	transform: scale(1.1);
+}
+
+.image-caption {
+	padding: 10px;
+	font-size: 14px;
+	color: #444;
+	text-align: center;
+	font-family: "Arial", sans-serif;
+	font-weight: bold;
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubre España y el Clima</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+
+    <div class="containertitulo">
+        <h1>Descubre España</h1>
+        <button id="theme-toggle">Cambiar Tema</button>
+        <button id="info-button">¿Cómo funciona?</button>
+    </div>
+    <div class="contenedor">
+        <!-- div1 - seleccionar cpp -->
+        <div class="div">
+            <form action="">
+                <label>Comunitat: </label>
+                <select name="ccaa" id="ccaa">
+                    <option value="" disabled selected>Selecciona una opción</option>
+                </select><br><br>
+
+                <label>Província: </label>
+                <select name="provincia" id="provincia">
+                    <option value="" disabled selected>Selecciona una opción</option>
+                </select><br><br>
+
+                <label>Població: </label>
+                <select name="poblacion" id="poblacion">
+                    <option value="" disabled selected>Selecciona una opción</option>
+                </select><br><br>
+
+                <input type="submit" value="ENVIAR" id="submit">
+            </form>
+        </div>
+        <!-- div2 - clima -->
+        <div class="div">
+            <div class="container">
+                <div class="weather-side">
+                    <div class="weather-gradient"></div>
+                    <div class="date-container">
+                        <h2 class="date-dayname" id="dayName">Martes</h2>
+                        <span class="date-day" id="fullDate">15 Ene 2025</span>
+                        <i class="location-icon" data-feather="map-pin"></i>
+                        <span class="location" id="location">Madrid, ES</span>
+                    </div>
+                    <div class="weather-container">
+                        <i class="weather-icon" data-feather="sun"></i>
+                        <h1 class="weather-temp" id="temp">29°C</h1>
+                        <h3 class="weather-desc" id="weatherDesc">Soleado</h3>
+                    </div>
+                </div>
+                <div class="info-side">
+                    <div class="today-info-container">
+                        <div class="today-info">
+                            <div class="precipitation">
+                                <span class="title">PRECIPITACIÓN</span>
+                                <span class="value" id="precipitation">0%</span>
+                            </div>
+                            <div class="humidity">
+                                <span class="title">HUMEDAD</span>
+                                <span class="value" id="humidity">34%</span>
+                            </div>
+                            <div class="wind">
+                                <span class="title">VIENTO</span>
+                                <span class="value" id="wind">0 km/h</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- mostrar datos de la poblacion -->
+    <div id="datos-container"></div>
+    <div id="image-container"></div>
+
+    <div id="poblacion-texto-container"></div> <!-- mostrarmos texto seleccionado -->
+
+    <input type="file" id="fileInput" accept="image/*"> <!-- input para seleccionar la imagen -->
+
+    <!-- mostrar imagen cargada -->
+    <div id="imageContainer">
+        <img id="imagePreview" src="" />
+    </div>
+
+    <!-- Modal -->
+    <div id="info-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Uso de APIs en esta aplicación</h2>
+            <p>
+                En esta aplicación, he utilizado varias APIs de navegador para que quede mas completo.
+                En este proyecto he utilizado las siguientes API's:
+            </p>
+
+            <h3>API FileReader</h3>
+            <p>
+                La API <strong>FileReader</strong> permite leer archivos seleccionados por el usuario directamente en el
+                navegador
+                sin necesidad de subirlos a un servidor. En esta aplicación, la usamos para:
+            </p>
+            <ul>
+                <li>
+                    <strong>Leer imágenes</strong>: Cuando seleccionas una imagen desde tu dispositivo, el navegador la
+                    convierte
+                    en una URL de datos (data URL) utilizando <code>FileReader.readAsDataURL()</code>.
+                </li>
+                <li>
+                    <strong>Mostrar una vista previa</strong>: La URL de datos se asigna directamente a la etiqueta
+                    <code>&lt;img&gt;</code>,
+                    lo que permite ver la imagen antes de subirla.
+                </li>
+            </ul>
+            <p>
+                Esto es útil porque no requiere conexión a un servidor y permite una experiencia más rápida y fluida.
+            </p>
+
+            <h3>API fetch</h3>
+            <p>
+                La API <strong>fetch</strong> se utiliza para realizar solicitudes HTTP y obtener datos de servidores
+                externos.
+                En esta aplicación, la usamos para:
+            </p>
+            <ul>
+                <li>
+                    <strong>Obtener datos de comunidades, provincias y poblaciones</strong>: Utilizamos datos públicos
+                    de GitHub
+                    para cargar dinámicamente las opciones de comunidades, provincias y poblaciones en los menús
+                    desplegables.
+                </li>
+                <li>
+                    <strong>Consultar el clima</strong>: Utilizamos la API de <strong>OpenWeatherMap</strong> para
+                    obtener datos
+                    meteorológicos en tiempo real de la población seleccionada.
+                </li>
+                <li>
+                    <strong>Buscar imágenes en Wikimedia</strong>: Utilizamos la API de Wikimedia Commons para buscar y
+                    mostrar
+                    imágenes relacionadas con la población seleccionada.
+                </li>
+            </ul>
+            <p>
+                La API fetch es poderosa porque permite realizar solicitudes asíncronas y manejar respuestas en formato
+                JSON,
+                lo que hace que la aplicación sea más dinámica y responsive.
+            </p>
+
+            <h3>Otras funcionalidades</h3>
+            <p>
+                Además de las APIs mencionadas, esta aplicación también utiliza:
+            </p>
+            <ul>
+                <li>
+                    <strong>LocalStorage</strong>: Para almacenar preferencias del usuario, como el tema oscuro o claro.
+                </li>
+                <li>
+                    <strong>Geolocation</strong>: En futuras actualizaciones, podríamos usar esta API para obtener la
+                    ubicación
+                    del usuario y mostrar datos relevantes basados en su posición.
+                </li>
+            </ul>
+            <p>
+                Estas APIs son parte fundamental de las aplicaciones web modernas, ya que permiten crear experiencias
+                ricas
+                e interactivas directamente en el navegador.
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+
+</html>
